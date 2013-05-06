@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+//import com.google.appengine.api.users.*;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -57,6 +58,16 @@ public class Otanga implements EntryPoint {
 		nameField.setFocus(true);
 		nameField.selectAll();
 
+		/*UserService userService = UserServiceFactory.getUserService();
+	    User user = userService.getCurrentUser();
+	    if (user == null) {
+	    	userService.createLoginURL("");//request.getRequestURI());
+	    }
+	    else {
+	    	user.getNickname();
+	    }
+	    */
+		
 		// Create the popup dialog box
 		final DialogBox dialogBox = new DialogBox();
 		dialogBox.setText("Remote Procedure Call");

@@ -32,3 +32,25 @@ h1 {
 #closeButton {
   margin: 15px 6px 6px;
 }
+
+#header {
+	width:100%;	
+	background: black;
+}
+
+#header #otanga a {
+	color:white;
+}
+
+
+#header #login {
+	color:white;
+	float:right;
+}
+
+#header #login a {
+	color:white;
+}
+
+
+

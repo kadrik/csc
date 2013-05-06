@@ -18,7 +18,7 @@
   
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>Otanga.html</welcome-file>
+    <welcome-file>otanga.jsp</welcome-file>
   </welcome-file-list>
 
 </web-app>

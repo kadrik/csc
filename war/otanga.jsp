@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=US-ASCII"
+    pageEncoding="US-ASCII"%>
+<%@ page import="com.google.appengine.api.users.*" %>
+
 <!doctype html>
 <!-- The DOCTYPE declaration above will set the     -->
 <!-- browser's rendering engine into                -->
@@ -44,19 +48,29 @@
       </div>
     </noscript>
 
-    <h1>Otanga Starter Project</h1>
 
-    <table align="center">
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Please enter your name:</td>        
-      </tr>
-      <tr>
-        <td id="nameFieldContainer"></td>
-        <td id="sendButtonContainer"></td>
-      </tr>
-      <tr>
-        <td colspan="2" style="color:red;" id="errorLabelContainer"></td>
-      </tr>
-    </table>
+<div id="header">
+<span id="otanga"><a href="/">Otanga</a></span>
+<span id="login">
+<%
+    UserService userService = UserServiceFactory.getUserService();
+    User user = userService.getCurrentUser();
+    if (user == null)
+    {%>
+        <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">login</a>
+    <%}
+    else
+    {%>
+	        <%=user.getNickname()%>
+	        <!-- logout link <%=user.getUserId()%> -->
+	        <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">logout</a>
+<% } %>
+</span>
+</div>
+ 
+
+<iframe name="content" width="100%" height="600px" frameborder=0></iframe>
+
+
   </body>
 </html>
