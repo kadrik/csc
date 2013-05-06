@@ -61,7 +61,7 @@
 	        <%= Otanga.getUserName() %>
 	        <a href="<%= Otanga.getLogoutUrl(request.getRequestURI()) %>">logout</a>
 	        
-	        <%= Otanga.isProfileStored() ? Otanga.testStore() : "not stored" %>
+	        <%= !Otanga.isProfileStored() ? Otanga.storeAndUpdateProfile() : Otanga.getStoredProfile() %>
     <%}
     else
     {%>
