@@ -5,7 +5,6 @@ import com.google.appengine.api.datastore.Entity;	// temporary
 
 public class Otanga {
 	private final static UserService userService = UserServiceFactory.getUserService();
-	private static User user;
 	
 	private Otanga(){}
 
@@ -34,11 +33,11 @@ public class Otanga {
 		return Storage.getUser(getUser().getUserId()) != null;
 	}
 	
-	public static String testStore(){		
+	public static String storeAndUpdateProfile(){		
 		long id = Storage.storeUser(getUser().getUserId());
 		if (id >= 0)
 		{
-			if (Storage.updateUser(getUser().getUserId(), "test"))
+			if (Storage.updateUser(getUser().getUserId(), "TheNickname"))
 			{
 				Entity entity = Storage.getUser(getUser().getUserId());
 				return (String)entity.getProperty("nickname");
@@ -46,6 +45,16 @@ public class Otanga {
 		}
 		return "!error!";
 	}
+	
+	public static String getStoredProfile()
+	{
+		Entity entity = Storage.getUser(getUser().getUserId());
+		if (entity != null)
+			return (String)entity.getProperty("nickname");
+		else
+			return "!error!";
+	}
+	
 	
 	
 }
