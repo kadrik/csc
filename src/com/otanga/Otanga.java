@@ -1,13 +1,11 @@
 package com.otanga;
 
 import com.google.appengine.api.users.*;
+import com.google.appengine.api.datastore.Entity;	// temporary
 
 public class Otanga {
-	static UserService userService;
-	static User user;
-	static {
-		userService = UserServiceFactory.getUserService();
-	}
+	private final static UserService userService = UserServiceFactory.getUserService();
+	private static User user;
 	
 	private Otanga(){}
 
@@ -32,5 +30,22 @@ public class Otanga {
 		return (getUser()!=null);
 	}
 
+	public static boolean isProfileStored() {
+		return Storage.getUser(getUser().getUserId()) != null;
+	}
+	
+	public static String testStore(){		
+		long id = Storage.storeUser(getUser().getUserId());
+		if (id >= 0)
+		{
+			if (Storage.updateUser(getUser().getUserId(), "test"))
+			{
+				Entity entity = Storage.getUser(getUser().getUserId());
+				return (String)entity.getProperty("nickname");
+			}
+		}
+		return "!error!";
+	}
+	
 	
 }
