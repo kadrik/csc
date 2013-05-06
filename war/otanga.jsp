@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=US-ASCII"
     pageEncoding="US-ASCII"%>
 <%@ page import="com.google.appengine.api.users.*" %>
+<%@ page import="com.otanga.Otanga" %>
 
 <!doctype html>
 <!-- The DOCTYPE declaration above will set the     -->
@@ -53,18 +54,17 @@
 <span id="otanga"><a href="/">Otanga</a></span>
 <span id="login">
 <%
-    UserService userService = UserServiceFactory.getUserService();
-    User user = userService.getCurrentUser();
-    if (user == null)
+    //UserService userService = UserServiceFactory.getUserService();
+    //User user = userService.getCurrentUser();
+    if (Otanga.isUserLoggedIn())
     {%>
-        <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">login</a>
+	        <%= Otanga.getUserName() %>
+	        <a href="<%= Otanga.getLogoutUrl(request.getRequestURI()) %>">logout</a>
     <%}
     else
     {%>
-	        <%=user.getNickname()%>
-	        <!-- logout link <%=user.getUserId()%> -->
-	        <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">logout</a>
-<% } %>
+        <a href="<%= Otanga.getLoginUrl(request.getRequestURI()) %>">login</a>
+	<% } %>
 </span>
 </div>
  
