@@ -58,10 +58,9 @@
     //User user = userService.getCurrentUser();
     if (Otanga.isUserLoggedIn())
     {%>
-	        <%= Otanga.getUserName() %>
-	        <a href="<%= Otanga.getLogoutUrl(request.getRequestURI()) %>">logout</a>
-	        
-	        <%= !Otanga.isProfileStored() ? Otanga.storeAndUpdateProfile() : Otanga.getStoredProfile() %>
+	        <%= Otanga.getUserName() %>&nbsp;
+	        <a href="<%= Otanga.getLogoutUrl(request.getRequestURI()) %>">logout</a>&nbsp;
+	        <%= !Otanga.isProfileStored() ? Otanga.testStoreAndUpdateProfile() + " (new)" : Otanga.getStoredProfile() + " (existing)" %>
     <%}
     else
     {%>
