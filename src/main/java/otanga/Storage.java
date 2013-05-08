@@ -1,4 +1,4 @@
-package com.otanga;
+package otanga;
 
 import com.google.appengine.api.datastore.*;
 import com.google.appengine.api.datastore.Query.*;

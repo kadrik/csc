@@ -1,4 +1,4 @@
-package com.otanga;
+package otanga;
 
 import java.util.Map;
 import com.google.appengine.api.datastore.Entity;

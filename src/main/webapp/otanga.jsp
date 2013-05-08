@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=US-ASCII"
     pageEncoding="US-ASCII"%>
 <%@ page import="com.google.appengine.api.users.*" %>
-<%@ page import="com.otanga.Otanga" %>
+<%@ page import="otanga.Otanga" %>
 
 <!doctype html>
 <!-- The DOCTYPE declaration above will set the     -->

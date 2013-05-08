@@ -1,4 +1,4 @@
-package com.otanga;
+package otanga;
 
 import com.google.appengine.api.users.*;
 // import com.google.appengine.api.datastore.Entity; // temporary
