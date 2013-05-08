@@ -67,10 +67,12 @@ public class GuestbookServletTest {
     when(response.getWriter()).thenReturn(new PrintWriter(stringWriter));
 
     otangaServlet.doGet(request, response);
-
+    
     User currentUser = UserServiceFactory.getUserService().getCurrentUser();
 
-    assertEquals("Hello, " + currentUser.getNickname() + "\n", stringWriter.toString());
+    String newLine = System.getProperty("line.separator");
+    
+    assertEquals("Hello, " + currentUser.getNickname() + newLine, stringWriter.toString());
   }
 
 }
