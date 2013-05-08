@@ -1,1 +1,0 @@
-Just a dummy file that allows its parent folder to be added in git.
