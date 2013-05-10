@@ -1,6 +1,7 @@
-package otanga;
+package otanga.Models;
 
 import com.google.appengine.api.datastore.Entity;
+import otanga.Models.Model;
 
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 
-public class DatastoreModel implements Model{
+public class DatastoreModel implements Model {
 
     private final Entity _entity;
 

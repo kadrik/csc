@@ -1,4 +1,4 @@
-package otanga;
+package otanga.Models;
 
 import java.util.Map;
 
