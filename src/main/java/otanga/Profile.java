@@ -1,27 +1,21 @@
 package otanga;
 
+import com.google.appengine.api.datastore.Entity;
+
 import java.util.Map;
 
-public abstract class Profile {
-	
-	public String getUserId() {
+public class Profile extends DatastoreModel{
+
+    public Profile(Entity entity) {
+        super(entity);
+    }
+
+    public String getUserId() {
 		return (String) this.getProperty("userId");
 	}
-	
 	/*
 	public String getUserType() {
 		return (String) this.getProperty("userType");
 	}
 	*/
-		
-	public abstract Map<String, Object> getProperties();
-	
-	public abstract boolean hasProperty(String propertyName);
-
-	public abstract Object getProperty(String propertyName);
-	
-	public abstract void setProperty(String propertyName, Object value);
-	
-	public abstract void removeProperty(String propertyName);
-	
 }
