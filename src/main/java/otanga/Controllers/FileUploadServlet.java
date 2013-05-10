@@ -36,11 +36,16 @@ public class FileUploadServlet extends HttpServlet {
                     continue;
 
                 String fileName = FilenameUtils.getName(item.getName());
-                InputStream fileContent =item.openStream(); // item.getInputStream();
+                InputStream fileContent = item.openStream(); // item.getInputStream();
 
                 UUID fileKey = null;
 
                 int fileSize = fileContent.available();
+
+
+                System.err.print("FileName: " + fileName);
+                System.err.print("FileSize: " + fileSize);
+
                 if (fileSize > 0)
                 {
                     try{
@@ -54,9 +59,15 @@ public class FileUploadServlet extends HttpServlet {
                         fileContent.close();
                     }
                 }
+                else
+                {
+                    System.err.print("The file is empty!");
+                }
 
                 if (fileKey != null)
                 {
+                    System.err.print("Key: " + fileKey.toString());
+
                     //TODO: Respond somehow using the fileKey
                     resp.setStatus(200); // Status: OK
                     resp.setContentType("text/plain");
@@ -71,6 +82,7 @@ public class FileUploadServlet extends HttpServlet {
                 }
                 else
                 {
+                    System.err.print("The key is null!");
                     resp.setStatus(400); // Status: Bad Request
                 }
             }
