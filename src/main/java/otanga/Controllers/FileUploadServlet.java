@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.*;
 import java.io.*;
 import org.apache.commons.io.*;
@@ -50,10 +51,21 @@ public class FileUploadServlet extends HttpServlet {
                 if (fileKey != null)
                 {
                     //TODO: Respond somehow using the fileKey
+                    resp.setStatus(200); // Status: OK
                     resp.setContentType("text/plain");
-                    resp.getWriter().println("Uploaded file with key: " + fileKey.toString());
-                }
+                    resp.getWriter().println("Uploaded file '" + fileName + "' with key: " + fileKey.toString());
 
+
+                    //test reading back the file
+                    String input = FileStorage.retrieveImage(fileKey);
+                    resp.getWriter().println();
+                    resp.getWriter().println(input);
+
+                }
+                else
+                {
+                    resp.setStatus(400); // Status: Bad Request
+                }
             }
         } catch (FileUploadException e) {
             throw new IOException("Cannot parse multipart request.", e);
