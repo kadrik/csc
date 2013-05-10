@@ -33,7 +33,7 @@ public final class Storage {
 		PreparedQuery pq = dataStore.prepare(q);
 		
 		for (Entity entity : pq.asIterable()) {
-			return new DatastoreEntityProfile(entity);
+			return new Profile(entity);
 		}
 		
 		return null;
@@ -56,17 +56,14 @@ public final class Storage {
 		if (entityKey == null)
 			return null;
 
-		return new DatastoreEntityProfile(entity);
+		return new Profile(entity);
 	}
 	
 	public static boolean updateUserProfile(Profile userProfile) {
 		if (userProfile == null)
 			throw new IllegalArgumentException();
-		
-		if (!(userProfile instanceof DatastoreEntityProfile))
-			throw new IllegalArgumentException();
-		
-		Entity entity = ((DatastoreEntityProfile)userProfile).getEntity();
+
+		Entity entity = (userProfile).getEntity();
 		return (dataStore.put(entity) != null);
 	}
 	
@@ -74,10 +71,10 @@ public final class Storage {
 		if (userProfile != null)
 			throw new IllegalArgumentException();
 
-		if (!(userProfile instanceof DatastoreEntityProfile))
+		if (!(userProfile instanceof Profile))
 			throw new IllegalArgumentException();
 		
-		Entity entity = ((DatastoreEntityProfile)userProfile).getEntity();
+		Entity entity = (userProfile).getEntity();
 		dataStore.delete(entity.getKey());
 	}
 	
@@ -94,10 +91,7 @@ public final class Storage {
 			dataStore.delete(entity.getKey());
 		}
 	}
-	
 
-
-	
 	
 	
  	public static Entity getUser(String userId) {
