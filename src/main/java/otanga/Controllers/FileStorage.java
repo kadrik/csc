@@ -1,4 +1,4 @@
-package otanga;
+package otanga.Controllers;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,7 +26,7 @@ public class FileStorage {
 
     private FileStorage() {}
 
-    public UUID storeImage(){
+    public static UUID storeImage(byte[] fileContent, String contentType){
         UUID key = UUID.randomUUID();
         GSFileOptionsBuilder optionsBuilder = new GSFileOptionsBuilder()
             .setBucket("images")
