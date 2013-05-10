@@ -23,13 +23,20 @@ public class FileUploadServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
-            List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(req);
-            for (FileItem item : items) {
+            ServletFileUpload fileUpload = new ServletFileUpload();
+            FileItemIterator items = fileUpload.getItemIterator(req);
+            while (items.hasNext()) {
+                FileItemStream item = items.next();
+
+
+                // List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(req);
+            //for (FileItem item : items) {
+
                 if (item.isFormField())
                     continue;
 
                 String fileName = FilenameUtils.getName(item.getName());
-                InputStream fileContent = item.getInputStream();
+                InputStream fileContent =item.openStream(); // item.getInputStream();
 
                 UUID fileKey = null;
 
