@@ -35,6 +35,6 @@
             <% } %>
         </span>
     </div>
-    <iframe name="content" width="100%" height="600px" style="border: none" src="upload.jsp"></iframe>
+    <iframe name="content" width="100%" height="600px" style="border: none" src="Views/upload.jsp"></iframe>
 </body>
 </html>
