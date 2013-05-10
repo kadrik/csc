@@ -30,7 +30,7 @@ public class FileUploadServlet extends HttpServlet {
                 String fileName = FilenameUtils.getName(item.getName());
                 InputStream fileContent = item.getInputStream();
 
-                UUID fileKey = nul;
+                UUID fileKey = null;
 
                 int fileSize = fileContent.available();
                 if (fileSize > 0)

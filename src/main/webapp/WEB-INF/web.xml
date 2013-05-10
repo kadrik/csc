@@ -5,6 +5,10 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <servlet>
+        <servlet-name>upload</servlet-name>
+        <servlet-class>otanga.Controllers.FileUploadServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>sign</servlet-name>
         <servlet-class>otanga.SignGuestbookServlet</servlet-class>
     </servlet>
