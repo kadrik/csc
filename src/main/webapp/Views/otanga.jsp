@@ -23,7 +23,9 @@
         <span id="login">
             <% if (Otanga.isUserLoggedIn()) { %>
                 <%= Otanga.getUserName() %>&nbsp;&nbsp;<a href="<%= Otanga.getLogoutUrl(request.getRequestURI()) %>" style="font-weight: bold;">Sign out</a>&nbsp;
-                <%= !Otanga.isProfileStored() ? Otanga.testStoreAndUpdateProfile() + " (new)" : Otanga.getStoredProfile() + " (existing)" %>
+                <%= !Otanga.isProfileStored() ?
+                        Otanga.testStoreAndUpdateProfile() + " (new)" :
+                        (String)Otanga.getStoredProfile().getProperty("nickname") + " (existing)" %>
             <%}
             else { %>
                 <a href="<%= Otanga.getLoginUrl(request.getRequestURI()) %>">Sign in</a>

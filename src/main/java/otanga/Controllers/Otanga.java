@@ -40,6 +40,13 @@ public final class Otanga {
 		// return Storage.getUser(getUser().getUserId()) != null;
 	}
 
+    public static void UpdateProfile(Profile profile)
+    {
+        if (profile != null) {
+            Storage.updateUserProfile(profile);
+        }
+    }
+
 	public static String testStoreAndUpdateProfile() {
 		Profile profile = Storage.createUserProfile(getUser().getUserId());
 		if (profile != null) {
@@ -74,9 +81,9 @@ public final class Otanga {
 		return "(error)";
 	}
 
-	public static String getStoredProfile() {
+	public static Profile getStoredProfile() {
 		Profile profile = Storage.getUserProfile(getUser().getUserId());
-		return (profile != null) ? (String)profile.getProperty("nickname") : "(error)";
+		return profile;
 		
 		/*
 		Entity entity = Storage.getUser(getUser().getUserId());

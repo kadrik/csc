@@ -25,9 +25,14 @@ public class FileStorage {
 
     private FileStorage() {}
 
-    public static String storeImage(byte[] fileContent, String contentType){
+    public static String storeImage(byte[] fileContent, String contentType, java.io.PrintWriter responseWriter){
 
         String key = UUID.randomUUID().toString().replace("-", "").toLowerCase() + "$" + contentType.replace('/','!');
+
+        responseWriter.println();
+        responseWriter.println("\t[FileStorage.storeImage] Key: " + key);
+        responseWriter.println("\t[FileStorage.storeImage] ContentType: " + contentType);
+        responseWriter.println("\t[FileStorage.storeImage] Length: " + fileContent.length);
 
         GSFileOptionsBuilder optionsBuilder = new GSFileOptionsBuilder()
             .setBucket(_bucketName)
@@ -42,14 +47,18 @@ public class FileStorage {
 
             ByteBuffer byteBuffer = ByteBuffer.allocate(fileContent.length);
             byteBuffer.put(fileContent);
-            byteBuffer.position(0);
+            byteBuffer.rewind();
 
             int writeResult = writeChannel.write(byteBuffer, "UTF-8");
+
+            responseWriter.println("\t[FileStorage.storeImage] WriteResult: " + writeResult);
+            responseWriter.println();
 
             writeChannel.closeFinally();
 
         } catch (IOException e) {
             key = null;
+            responseWriter.println("\t[FileStorage.storeImage] IOException: " + e.getMessage());
             e.printStackTrace();
         }
 
@@ -87,10 +96,24 @@ public class FileStorage {
             {
                 buffer.rewind();
 
-                for (int i = 0; i < count; i++)
-                    responseWriter.print(Integer.toHexString(buffer.get()) + " ");
+                if (contentType.toLowerCase().startsWith("text/"))
+                {
+                    byte[] byteArray = new byte[count];
+                    buffer.get(byteArray, 0, count);
+                    responseWriter.print(new String(byteArray));
+                }
+                else
+                {
+                    for (int i = 0; i < count; i++)
+                    {
+                        Byte b = buffer.get();
+                        responseWriter.print(Integer.toHexString(buffer.get() & 0xff) + " ");
+                    }
+                }
 
-                buffer.rewind();
+                //buffer.rewind();
+
+                buffer.clear();
             }
             responseWriter.println();
             responseWriter.println();

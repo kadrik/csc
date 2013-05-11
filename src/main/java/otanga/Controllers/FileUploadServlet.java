@@ -45,7 +45,7 @@ public class FileUploadServlet extends HttpServlet {
                 int fileSize = fileContent.available();
 
                 resp.getWriter().println("FileName: " + fileName);
-                resp.getWriter().println("FileSize: " + fileSize);
+                resp.getWriter().println("FileSize: " + fileSize + " bytes");
                 resp.getWriter().println("ContentType: " + item.getContentType());
                 resp.getWriter().println();
 
@@ -60,7 +60,7 @@ public class FileUploadServlet extends HttpServlet {
 
                         resp.getWriter().println();
                         resp.getWriter().println("Trying to store the file...");
-                        fileKey = FileStorage.storeImage(data, item.getContentType());
+                        fileKey = FileStorage.storeImage(data, item.getContentType(), resp.getWriter());
                         resp.getWriter().println("FileStorage.storeImage returned: " +  fileKey);
                     }
                     finally {
