@@ -25,11 +25,13 @@ public class FileStorage {
 
     private FileStorage() {}
 
-    public static UUID storeImage(byte[] fileContent, String contentType){
-        UUID key = UUID.randomUUID();
+    public static String storeImage(byte[] fileContent, String contentType){
+
+        String key = UUID.randomUUID().toString().replace("-", "").toLowerCase() + "$" + contentType.replace('/','!');
+
         GSFileOptionsBuilder optionsBuilder = new GSFileOptionsBuilder()
             .setBucket(_bucketName)
-            .setKey(key.toString().replace("-", "").toLowerCase())
+            .setKey(key)
             .setMimeType(contentType)
             .setAcl("private");
 
@@ -40,37 +42,60 @@ public class FileStorage {
 
             ByteBuffer byteBuffer = ByteBuffer.allocate(fileContent.length);
             byteBuffer.put(fileContent);
+            byteBuffer.position(0);
 
-            writeChannel.write(byteBuffer, "UTF-8");
+            int writeResult = writeChannel.write(byteBuffer, "UTF-8");
 
             writeChannel.closeFinally();
 
-
         } catch (IOException e) {
-            e.printStackTrace();
             key = null;
+            e.printStackTrace();
         }
 
         return key;
     }
 
-    public static String retrieveImage(UUID imageKey)
+    public static String retrieveImage(String imageKey, java.io.PrintWriter responseWriter)
     {
-        if (imageKey == null)
+        if (imageKey == null || imageKey.length() == 0)
             throw new IllegalArgumentException("imageKey");
 
         String output = null;
 
-        String filename = "/gs/" +  _bucketName + "/" +  imageKey.toString().replace("-", "").toLowerCase();
+        String filename = "/gs/" +  _bucketName + "/" +  imageKey;
+
+        String contentType = imageKey.substring(imageKey.indexOf('$') + 1).replace('!','/');
 
         AppEngineFile readableFile = new AppEngineFile(filename);
         try {
             FileStat stat = fileService.stat(readableFile);
-            output = stat.getLength().toString();
+            output = stat.getLength().toString() + " bytes";
 
-            //FileReadChannel readChannel = fileService.openReadChannel(readableFile, false);
-            // // TODO: read the file contents here
-            //readChannel.close();
+            responseWriter.println();
+            responseWriter.println("\t[FileStorage.retrieveImage] FileName: " + stat.getFilename());
+            responseWriter.println("\t[FileStorage.retrieveImage] ContentType: " + contentType);
+            responseWriter.println("\t[FileStorage.retrieveImage] Content: ");
+            responseWriter.println();
+            responseWriter.print("\t");
+
+            FileReadChannel readChannel = fileService.openReadChannel(readableFile, false);
+
+            ByteBuffer buffer = ByteBuffer.allocateDirect(1024);
+            int count;
+            while ((count = readChannel.read(buffer)) > 0)
+            {
+                buffer.rewind();
+
+                for (int i = 0; i < count; i++)
+                    responseWriter.print(Integer.toHexString(buffer.get()) + " ");
+
+                buffer.rewind();
+            }
+            responseWriter.println();
+            responseWriter.println();
+
+            readChannel.close();
 
         } catch (IOException e) {
             e.printStackTrace();
