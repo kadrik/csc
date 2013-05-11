@@ -59,6 +59,7 @@ public class FileStorage {
         } catch (IOException e) {
             key = null;
             responseWriter.println("\t[FileStorage.storeImage] IOException: " + e.getMessage());
+            e.printStackTrace(responseWriter);
             e.printStackTrace();
         }
 
@@ -106,12 +107,9 @@ public class FileStorage {
                 {
                     for (int i = 0; i < count; i++)
                     {
-                        Byte b = buffer.get();
                         responseWriter.print(Integer.toHexString(buffer.get() & 0xff) + " ");
                     }
                 }
-
-                //buffer.rewind();
 
                 buffer.clear();
             }
