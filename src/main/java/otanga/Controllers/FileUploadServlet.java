@@ -23,11 +23,11 @@ public class FileUploadServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
+
             ServletFileUpload fileUpload = new ServletFileUpload();
             FileItemIterator items = fileUpload.getItemIterator(req);
             while (items.hasNext()) {
                 FileItemStream item = items.next();
-
 
                 // List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(req);
             //for (FileItem item : items) {
@@ -41,11 +41,6 @@ public class FileUploadServlet extends HttpServlet {
                 UUID fileKey = null;
 
                 int fileSize = fileContent.available();
-
-
-                System.err.print("FileName: " + fileName);
-                System.err.print("FileSize: " + fileSize);
-
                 if (fileSize > 0)
                 {
                     try{
@@ -59,31 +54,23 @@ public class FileUploadServlet extends HttpServlet {
                         fileContent.close();
                     }
                 }
-                else
-                {
-                    System.err.print("The file is empty!");
-                }
 
                 if (fileKey != null)
                 {
-                    System.err.print("Key: " + fileKey.toString());
-
-                    //TODO: Respond somehow using the fileKey
+                    //TODO: Respond appropriately!
                     resp.setStatus(200); // Status: OK
                     resp.setContentType("text/plain");
                     resp.getWriter().println("Uploaded file '" + fileName + "' with key: " + fileKey.toString());
 
-
                     //test reading back the file
-                    String input = FileStorage.retrieveImage(fileKey);
+                    String result = FileStorage.retrieveImage(fileKey);
                     resp.getWriter().println();
-                    resp.getWriter().println(input);
-
+                    resp.getWriter().println(result);
                 }
                 else
                 {
-                    System.err.print("The key is null!");
-                    resp.setStatus(400); // Status: Bad Request
+                    resp.setStatus(406); // Status: Not Acceptable
+                    // resp.setStatus(400); // Status: Bad Request
                 }
             }
         } catch (FileUploadException e) {
