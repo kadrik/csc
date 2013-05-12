@@ -32,8 +32,29 @@
             <% } %>
         </span>
     </div>
-    <div id="content">
-        <iframe name="contentFrame" width="100%" height="600px" style="border: none" src="<%= request.getContextPath()%>/Views/upload.jsp"></iframe>
+    <div id="splitpane">
+        <table border="0" cellpadding="0" cellspacing="0" style="width: 100%">
+        <tbody>
+        <tr>
+            <!-- Navigation Pane -->
+            <td valign="top" style="width: 200px; box-sizing: border-box;">
+                <div id="navpane">
+                    <ol>
+                        <li>Navigation Item 1</li>
+                        <li>Navigation Item 2</li>
+                        <li>Navigation Item 3</li>
+                    </ol>
+                </div>
+            </td>
+            <!-- Content Pane -->
+            <td valign="top" style="box-sizing: border-box;">
+                <div id="content">
+                    <iframe name="contentFrame" width="100%" height="600px" style="border: none" src="<%= request.getContextPath()%>/Views/upload.jsp"></iframe>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+        </table>
     </div>
 </body>
 </html>

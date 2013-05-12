@@ -1,21 +1,16 @@
 package otanga.Controllers;
 
-/**
- * Created with IntelliJ IDEA.
- * User: cedric
- * Date: 5/10/13
- * Time: 12:59 PM
- * To change this template use File | Settings | File Templates.
- */
-import com.google.appengine.api.files.*;
+import com.google.appengine.api.files.AppEngineFile;
+import com.google.appengine.api.files.FileReadChannel;
+import com.google.appengine.api.files.FileService;
+import com.google.appengine.api.files.FileServiceFactory;
+import com.google.appengine.api.files.FileStat;
+import com.google.appengine.api.files.FileWriteChannel;
 import com.google.appengine.api.files.GSFileOptions.GSFileOptionsBuilder;
-import sun.security.ssl.Debug;
 
 import java.nio.ByteBuffer;
 import java.io.IOException;
-import java.nio.channels.Channels;
 import java.util.UUID;
-import java.io.BufferedReader;
 
 public class FileStorage {
     // Get the file service
@@ -25,14 +20,19 @@ public class FileStorage {
 
     private FileStorage() {}
 
+    /**
+     * @deprecated use {@link otanga.Controllers.FileWriter} instead.
+     */
+    @Deprecated
     public static String storeImage(byte[] fileContent, String contentType, java.io.PrintWriter responseWriter){
 
-        String key = UUID.randomUUID().toString().replace("-", "").toLowerCase() + "$" + contentType.replace('/','!');
+        String key = UUID.randomUUID().toString().replace("-", "").toLowerCase() + "!" + contentType.replace('/','!');
 
         responseWriter.println();
+        responseWriter.println("\t[FileStorage.storeImage] Bucket: " + _bucketName);
         responseWriter.println("\t[FileStorage.storeImage] Key: " + key);
         responseWriter.println("\t[FileStorage.storeImage] ContentType: " + contentType);
-        responseWriter.println("\t[FileStorage.storeImage] Length: " + fileContent.length);
+        responseWriter.println("\t[FileStorage.storeImage] Length: " + fileContent.length + " bytes");
 
         GSFileOptionsBuilder optionsBuilder = new GSFileOptionsBuilder()
             .setBucket(_bucketName)
@@ -41,6 +41,8 @@ public class FileStorage {
             .setAcl("private");
 
         try {
+            // responseWriter.println("\t[FileStorage.storeImage] DefaultGsBucketName: " + fileService.getDefaultGsBucketName());
+
             AppEngineFile writableFile = fileService.createNewGSFile(optionsBuilder.build());
 
             FileWriteChannel writeChannel = fileService.openWriteChannel(writableFile, true);
@@ -60,6 +62,8 @@ public class FileStorage {
             key = null;
             responseWriter.println("\t[FileStorage.storeImage] IOException: " + e.getMessage());
             e.printStackTrace(responseWriter);
+            responseWriter.println();
+
             e.printStackTrace();
         }
 
@@ -75,7 +79,7 @@ public class FileStorage {
 
         String filename = "/gs/" +  _bucketName + "/" +  imageKey;
 
-        String contentType = imageKey.substring(imageKey.indexOf('$') + 1).replace('!','/');
+        String contentType = imageKey.substring(imageKey.indexOf('!') + 1).replace('!','/');
 
         AppEngineFile readableFile = new AppEngineFile(filename);
         try {
@@ -85,13 +89,11 @@ public class FileStorage {
             responseWriter.println();
             responseWriter.println("\t[FileStorage.retrieveImage] FileName: " + stat.getFilename());
             responseWriter.println("\t[FileStorage.retrieveImage] ContentType: " + contentType);
-            responseWriter.println("\t[FileStorage.retrieveImage] Content: ");
             responseWriter.println();
-            responseWriter.print("\t");
 
             FileReadChannel readChannel = fileService.openReadChannel(readableFile, false);
 
-            ByteBuffer buffer = ByteBuffer.allocateDirect(1024);
+            ByteBuffer buffer = ByteBuffer.allocateDirect(40);
             int count;
             while ((count = readChannel.read(buffer)) > 0)
             {
@@ -107,8 +109,9 @@ public class FileStorage {
                 {
                     for (int i = 0; i < count; i++)
                     {
-                        responseWriter.print(Integer.toHexString(buffer.get() & 0xff) + " ");
+                        responseWriter.print(("0" + Integer.toHexString(buffer.get() & 0xff)).substring(0, 2) + " ");
                     }
+                    responseWriter.println();
                 }
 
                 buffer.clear();
