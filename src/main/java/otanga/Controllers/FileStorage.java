@@ -21,7 +21,7 @@ public class FileStorage {
     // Get the file service
     private final static FileService fileService = FileServiceFactory.getFileService();
 
-    private final static String _bucketName = "images";
+    private final static String _bucketName = "otangaimages";
 
     private FileStorage() {}
 
