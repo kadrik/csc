@@ -50,3 +50,20 @@ body {
 	width: 100%;
 	margin-top: 30px;
 }
+
+#navpane {
+    margin-top: 30px;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#navpane ol {
+    padding: 0px 9px 0px 9px;
+    list-style-type: none;
+    list-style-position: outside;
+}
+
+#navpane ol li {
+    padding-bottom: 12px;
+}
