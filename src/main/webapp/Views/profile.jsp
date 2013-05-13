@@ -14,7 +14,7 @@
                     <input id="FullName" name="FullName" type="text" value="" />
                 </li>
             </ol>
-            <input type="submit" value="Register" />
+            <input type="submit" value="Save" />
         </fieldset>
     </form>
 
