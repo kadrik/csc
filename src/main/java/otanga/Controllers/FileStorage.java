@@ -40,7 +40,7 @@ public class FileStorage {
             .setBucket(_bucketName)
             .setKey(key)
             .setMimeType(contentType)
-            .setAcl("private");
+            .setAcl("project-private");
 
         try {
             // responseWriter.println("\t[FileStorage.storeImage] DefaultGsBucketName: " + fileService.getDefaultGsBucketName());
