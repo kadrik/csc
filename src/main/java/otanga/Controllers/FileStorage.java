@@ -10,7 +10,9 @@ import com.google.appengine.api.files.GSFileOptions.GSFileOptionsBuilder;
 
 import java.nio.ByteBuffer;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
+import java.security.MessageDigest;
 
 public class FileStorage {
     // Get the file service
@@ -81,6 +83,16 @@ public class FileStorage {
 
         String contentType = imageKey.substring(imageKey.indexOf('!') + 1).replace('!','/');
 
+        MessageDigest fileHash = null;
+        try {
+            fileHash = MessageDigest.getInstance("SHA-1");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        if (fileHash == null)
+            return "(FileHashError)";
+
         AppEngineFile readableFile = new AppEngineFile(filename);
         try {
             FileStat stat = fileService.stat(readableFile);
@@ -93,12 +105,17 @@ public class FileStorage {
 
             FileReadChannel readChannel = fileService.openReadChannel(readableFile, false);
 
-            ByteBuffer buffer = ByteBuffer.allocateDirect(40);
+            ByteBuffer buffer = ByteBuffer.allocateDirect(2048);
             int count;
             while ((count = readChannel.read(buffer)) > 0)
             {
                 buffer.rewind();
 
+                byte[] byteArray = new byte[count];
+                buffer.get(byteArray, 0, count);
+                fileHash.update(byteArray);
+
+                /*
                 if (contentType.toLowerCase().startsWith("text/"))
                 {
                     byte[] byteArray = new byte[count];
@@ -113,17 +130,25 @@ public class FileStorage {
                     }
                     responseWriter.println();
                 }
+                */
 
                 buffer.clear();
             }
+
+            responseWriter.print("\t[FileStorage.retrieveImage] SHA-1 Digest: " );
+            byte[] hash = fileHash.digest();
+            for (int i=0; i < hash.length; i++) {
+                responseWriter.print( Integer.toString( ( hash[i] & 0xff ) + 0x100, 16).substring(1) );
+            }
             responseWriter.println();
+
             responseWriter.println();
 
             readChannel.close();
 
         } catch (IOException e) {
             e.printStackTrace();
-            output = e.getMessage();
+            output = "(IOException)";
         }
 
         return output;
