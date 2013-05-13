@@ -5,15 +5,8 @@
   Time: 11:28 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="otanga.Controllers.*" %>
-<% if (!Otanga.isUserLoggedIn()) {response.sendRedirect(Otanga.getLoginUrl(request.getRequestURI()));} %>
+<%@include file="snippets/header.jsp"%>
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
                    <p>proceed with your consultation -)</p>
-</body>
-</html>
+
+<%@include file="snippets/footer.jsp"%>

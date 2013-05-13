@@ -1,15 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="otanga.Controllers.*" %>
+<%@include file="snippets/header.jsp"%>
 
-<!doctype html>
-<html>
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <link type="text/css" rel="stylesheet" href="../stylesheets/register.css">
-    <title>Register</title>
-</head>
-<body>
-    <form action="/register" method="post">
+<form action="/register" method="post">
         <input name="_returnUrl" type="hidden" value="<%= request.getContextPath() %>" />
         <fieldset>
             <ol>
@@ -26,5 +17,5 @@
             <input type="submit" value="Register" />
         </fieldset>
     </form>
-</body>
-</html>
+
+<%@include file="snippets/footer.jsp"%>

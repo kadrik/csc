@@ -46,24 +46,48 @@ body {
 	text-decoration: none;
 }
 
+#main {
+    width: 100%;
+    height: 600px;
+}
+
 #content {
-	width: 100%;
+	width: 80%;
 	margin-top: 30px;
+    float:right;
 }
 
-#navpane {
-    margin-top: 30px;
-    position: relative;
-    overflow-x: hidden;
-    overflow-y: auto;
+#navigation {
+    width:15%;
+    float:left;
+    margin-top: 50px;
+    margin-left: 20px;
 }
 
-#navpane ol {
-    padding: 0px 9px 0px 9px;
+
+
+
+fieldset {
+    margin: 0px;
+    padding: 0px;
+    border-style: none;
+}
+
+fieldset ol {
+    padding: 0px;
     list-style-type: none;
     list-style-position: outside;
 }
 
-#navpane ol li {
-    padding-bottom: 12px;
+fieldset ol li {
+    padding-bottom: 5px;
+}
+
+fieldset ol li label {
+    display: block;
+}
+
+fieldset ol input {
+    margin-bottom: 5px;
+    width: 300px
 }
