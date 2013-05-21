@@ -1,4 +1,4 @@
-package otanga.Models;
+package csc.Models;
 
 import java.util.Map;
 

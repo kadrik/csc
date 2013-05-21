@@ -1,4 +1,4 @@
-package otanga.Controllers;
+package csc.Controllers;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

@@ -1,8 +1,8 @@
-package otanga.Controllers;
+package csc.Controllers;
 
 import com.google.appengine.api.datastore.*;
 import com.google.appengine.api.datastore.Query.*;
-import otanga.Models.Profile;
+import csc.Models.Profile;
 
 public final class Storage {
 	

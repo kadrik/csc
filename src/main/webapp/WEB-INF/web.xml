@@ -6,7 +6,7 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <servlet>
         <servlet-name>upload</servlet-name>
-        <servlet-class>otanga.Controllers.FileUploadServlet</servlet-class>
+        <servlet-class>csc.Controllers.FileUploadServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>upload</servlet-name>
@@ -15,7 +15,7 @@
 
     <servlet>
         <servlet-name>sign</servlet-name>
-        <servlet-class>otanga.SignGuestbookServlet</servlet-class>
+        <servlet-class>csc.SignGuestbookServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>sign</servlet-name>
@@ -23,6 +23,6 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>Views/otanga.jsp</welcome-file>
+        <welcome-file>views/csc.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

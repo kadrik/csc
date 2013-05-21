@@ -1,13 +1,13 @@
-package otanga.Controllers;
+package csc.Controllers;
 
 import com.google.appengine.api.users.*;
-import otanga.Models.Profile;
+import csc.Models.Profile;
 // import com.google.appengine.api.datastore.Entity; // temporary
 
-public final class Otanga {
+public final class Hub {
 	private final static UserService userService = UserServiceFactory.getUserService();
 
-	private Otanga() {
+	private Hub() {
 	}
 
 	private static User getUser() {

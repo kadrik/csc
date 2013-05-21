@@ -1,3 +1,4 @@
+<%@ page import="csc.Controllers.Hub" %>
 <%@include file="snippets/header.jsp"%>
 
 <form action="/register" method="post">
@@ -7,7 +8,7 @@
                 <li>
                     <label for="UserName">User name</label>
                     <input id="UserName" name="UserName" type="text"
-                        value="<%= Otanga.isUserLoggedIn() ? Otanga.getUserName() : "" %>" />
+                        value="<%= Hub.isUserLoggedIn() ? Hub.getUserName() : "" %>" />
                 </li>
                 <li>
                     <label for="FullName">Full name</label>

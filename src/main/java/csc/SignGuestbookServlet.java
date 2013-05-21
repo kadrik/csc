@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package otanga;
+package csc;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;

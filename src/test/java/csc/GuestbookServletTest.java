@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package otanga;
+package csc;
 
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.mock;

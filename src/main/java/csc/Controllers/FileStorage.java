@@ -1,4 +1,4 @@
-package otanga.Controllers;
+package csc.Controllers;
 
 import com.google.appengine.api.files.AppEngineFile;
 import com.google.appengine.api.files.FileReadChannel;
@@ -23,7 +23,7 @@ public class FileStorage {
     private FileStorage() {}
 
     /**
-     * @deprecated use {@link otanga.Controllers.FileWriter} instead.
+     * @deprecated use {@link csc.Controllers.FileWriter} instead.
      */
     @Deprecated
     public static String storeImage(byte[] fileContent, String contentType, java.io.PrintWriter responseWriter){

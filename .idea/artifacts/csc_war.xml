@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="csc:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="csc-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="csc:war exploded" />
+    </root>
+  </artifact>
+</component>

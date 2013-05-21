@@ -1,7 +1,6 @@
-package otanga.Models;
+package csc.Models;
 
 import com.google.appengine.api.datastore.Entity;
-import otanga.Models.DatastoreModel;
 
 public class Profile extends DatastoreModel {
 

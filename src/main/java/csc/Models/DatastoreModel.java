@@ -1,7 +1,6 @@
-package otanga.Models;
+package csc.Models;
 
 import com.google.appengine.api.datastore.Entity;
-import otanga.Models.Model;
 
 import java.util.Map;
 

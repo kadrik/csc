@@ -5,8 +5,8 @@
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <groupId>com.otanga</groupId>
-    <artifactId>otanga</artifactId>
+    <groupId>com.csc</groupId>
+    <artifactId>csc</artifactId>
 
     <properties>
         <appengine.app.version>1</appengine.app.version>

@@ -6,8 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <div id="navigation">
-    <div class=item><a href="/Views/otanga.jsp">Home</a></div>
-    <div class=item><a href="/Views/profile.jsp">My Profile</a> </div>
-    <div class=item><a href="/Views/consult.jsp">Consult</a> </div>
-    <div class=item><a href="/Views/upload.jsp">Upload</a> </div>
+    <span class=item><a href="/views/csc.jsp">Home</a></span>
+    <span class=item><a href="/views/profile.jsp">My Profile</a> </span>
+    <span class=item><a href="/views/consult.jsp">Consult</a> </span>
+    <span class=item><a href="/views/upload.jsp">Upload</a> </span>
 </div>

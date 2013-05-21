@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="lib1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/target/otanga-1.0-SNAPSHOT/WEB-INF/lib/commons-fileupload-1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/target/otanga-1.0-SNAPSHOT/WEB-INF/lib/appengine-api-1.0-sdk-1.7.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/target/otanga-1.0-SNAPSHOT/WEB-INF/lib/jstl-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/target/otanga-1.0-SNAPSHOT/WEB-INF/lib/otanga-1.0-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/target/otanga-1.0-SNAPSHOT/WEB-INF/lib/commons-io-2.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
